@@ -1,3 +1,5 @@
+//@flow
+
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -6,12 +8,11 @@ import ListTodo from './Components/ListTodo'
 import InputTodo from './Components/InputTodo'
 
 class App extends Component {
-  var1 = 'test1'
   state = {
     list: []
   }
+
   render() {
-    console.log(this.state)
     return (
       <div className="App">
         <div className="App-header">
@@ -29,13 +30,13 @@ class App extends Component {
     );
   }
   _onSubmit(value) {
-    if(!value)return
+    if(!value) return;
     const newItem = [...this.state.list]
     newItem.push(value)
     this.setState({list: newItem})
   }
   _onDelete(value) {
-    if(!value)return
+    if(!value) return;
     const newItem = [...this.state.list]
     newItem.splice(value, 1)
     this.setState({list: newItem})
