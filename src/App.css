@@ -27,3 +27,11 @@ ul li {
   text-align: left;
 
 }
+.contents-is-done {
+  color: gray;
+  text-decoration: line-through;
+}
+.contents-default {
+  color: black;
+  text-decoration: none;
+}

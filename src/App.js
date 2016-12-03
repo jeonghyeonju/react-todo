@@ -25,18 +25,24 @@ class App extends Component {
         </div>
         <ListTodo
           list={this.state.list}
-          onDelete={this._onDelete.bind(this)}/>
+          onDelete={this._onDelete.bind(this)}
+          onToggle={this._onToggle.bind(this)}/>
       </div>
     );
   }
   _onSubmit(value) {
     const newItem = [...this.state.list]
-    newItem.push(value)
+    newItem.push({contents: value, isDone:false})
     this.setState({list: newItem})
   }
   _onDelete(value) {
     const newItem = [...this.state.list]
     newItem.splice(value, 1)
+    this.setState({list: newItem})
+  }
+  _onToggle(value) {
+    const newItem = [...this.state.list]
+    newItem[value].isDone = !newItem[value].isDone;
     this.setState({list: newItem})
   }
 }

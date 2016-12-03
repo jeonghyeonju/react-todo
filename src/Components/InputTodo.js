@@ -16,7 +16,7 @@ export default class InputTodo extends Component {
           this.props.onSubmit(todovalue)
         }}>
         <input type="text" value={this.state.todovalue} onChange={this._onChange.bind(this)}/>
-        <button type="submit">테스트1</button>
+        <button type="submit">Add</button>
       </form>
     )
   }
