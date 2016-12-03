@@ -7,11 +7,12 @@ class ListTodo extends Component {
     console.log('list todo Component')
     return (
       <div>
-        {(() => {
-         return this.props.list.map((it, i) => {
-           return <div key={i}>{it}</div>
-         })
-       })()}
+        <ul>
+          {(() => { return this.props.list.map((it, i) => {
+            return <li key={i}>{it} <button onClick={()=>this.props.onDelete(i)}>x</button></li>
+          })
+        })()}
+      </ul>
       </div>
     )
   }
@@ -25,8 +26,14 @@ class InputTodo extends Component {
     console.log('Input Todo render')
     return (
       <div>
-        <input type="text" value={this.state.todovalue} onChange={(ev)=>this._onChange(ev)}/>
-        <button type="button" onClick={()=>this.props.onSubmit(this.state.todovalue)}>테스트1</button>
+        <form onSubmit={(e)=>{
+            e.preventDefault()
+            this.props.onSubmit(this.state.todovalue)
+            this.setState({todovalue: ''});
+          }}>
+          <input type="text" value={this.state.todovalue} onChange={(ev)=>this._onChange(ev)}/>
+          <button type="button" onClick={ ()=> this.props.onSubmit(this.state.todovalue)}>테스트1</button>
+        </form>
       </div>
     )
   }
@@ -35,7 +42,6 @@ class InputTodo extends Component {
     event.preventDefault();
   }
 }
-
 class App extends Component {
   var1 = 'test1'
   state = {
@@ -53,14 +59,23 @@ class App extends Component {
           <InputTodo
             onSubmit={this._onSubmit.bind(this)} />
         </div>
-        <ListTodo list={this.state.list}/>
+        <ListTodo
+          list={this.state.list}
+          onDelete={this._onDelete.bind(this)}/>
       </div>
     );
   }
   _onSubmit(value) {
-    console.log(value)
-    this.state.list.push(value) //복사해서 써야한다
-    this.setState({list: this.state.list})
+    if(!value)return
+    const newItem = [...this.state.list]
+    newItem.push(value)
+    this.setState({list: newItem})
+  }
+  _onDelete(value) {
+    if(!value)return
+    const newItem = [...this.state.list]
+    newItem.splice(value, 1)
+    this.setState({list: newItem})
   }
 }
 
