@@ -36,7 +36,6 @@ class App extends Component {
     this.setState({list: newItem})
   }
   _onDelete(value) {
-    if(!value) return;
     const newItem = [...this.state.list]
     newItem.splice(value, 1)
     this.setState({list: newItem})
