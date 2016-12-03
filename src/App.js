@@ -32,7 +32,7 @@ class InputTodo extends Component {
             this.setState({todovalue: ''});
           }}>
           <input type="text" value={this.state.todovalue} onChange={(ev)=>this._onChange(ev)}/>
-          <button type="button" onClick={ ()=> this.props.onSubmit(this.state.todovalue)}>테스트1</button>
+          <button type="submit">테스트1</button>
         </form>
       </div>
     )
