@@ -30,7 +30,6 @@ class App extends Component {
     );
   }
   _onSubmit(value) {
-    if(!value) return;
     const newItem = [...this.state.list]
     newItem.push(value)
     this.setState({list: newItem})
