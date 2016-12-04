@@ -1,20 +1,24 @@
 //@flow
 
 import React, { Component } from 'react';
+import {List, ListItem} from 'material-ui/List';
+import Checkbox from 'material-ui/Checkbox';
+import FlatButton from 'material-ui/FlatButton';
 
 export default class ListTodo extends Component {
   render() {
     const {onDelete, onToggle} = this.props;
     return (
-      <ul>
+      <List>
         {(() => this.props.list.map((it, i) => (
-          <li key={i}>
-            <input type="checkbox" onChange={()=>onToggle(i)}/>
+          <ListItem
+            key={i}
+            leftCheckbox={<Checkbox onCheck={() => onToggle(i)} />}
+            rightIconButton={<FlatButton onClick={() => onDelete(i)}>&times;</FlatButton>}>
             <span className={ it.isDone ? 'contents-is-done' : 'contents-default' }>{it.contents}</span>
-            <button onClick={() => onDelete(i)}>x</button>
-          </li>
+          </ListItem>
         )))()}
-      </ul>
+      </List>
     )
   }
 }

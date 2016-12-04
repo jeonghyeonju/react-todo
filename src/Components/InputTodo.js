@@ -1,6 +1,8 @@
 //@flow
 
 import React, { Component } from 'react';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 
 export default class InputTodo extends Component {
   state = {
@@ -15,8 +17,14 @@ export default class InputTodo extends Component {
           if(!todovalue) return;
           this.props.onSubmit(todovalue)
         }}>
-        <input type="text" value={this.state.todovalue} onChange={this._onChange.bind(this)}/>
-        <button type="submit">Add</button>
+        <TextField id="todoValue"
+          hintText="your TODO"
+          floatingLabelText="input your todo item."
+          type="text" value={this.state.todovalue} onChange={this._onChange.bind(this)} />
+        <FlatButton
+          style={{fontSize: 14}}
+          backgroundColor="#EFEFEF"
+          type="submit">Add</FlatButton>
       </form>
     )
   }
