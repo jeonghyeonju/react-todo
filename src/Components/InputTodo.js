@@ -18,13 +18,17 @@ export default class InputTodo extends Component {
           this.props.onSubmit(todovalue)
         }}>
         <TextField id="todoValue"
+          style={{width: '100%'}}
           hintText="your TODO"
           floatingLabelText="input your todo item."
           type="text" value={this.state.todovalue} onChange={this._onChange.bind(this)} />
+        <div style={{textAlign: 'right'}}>
         <FlatButton
           style={{fontSize: 14}}
           backgroundColor="#EFEFEF"
           type="submit">Add</FlatButton>
+
+        </div>
       </form>
     )
   }
