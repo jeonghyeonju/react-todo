@@ -27,7 +27,6 @@ export default class InputTodo extends Component {
           style={{fontSize: 14}}
           backgroundColor="#EFEFEF"
           type="submit">Add</FlatButton>
-
         </div>
       </form>
     )
