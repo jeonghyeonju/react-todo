@@ -13,7 +13,7 @@ export default class ListTodo extends Component {
         {(() => this.props.list.map((it, i) => (
           <ListItem
             key={i}
-            leftCheckbox={<Checkbox onCheck={() => onToggle(i)} />}
+            leftCheckbox={<Checkbox checked={it.isDone} onCheck={() => onToggle(i)} />}
             rightIconButton={<FlatButton style={{right: '0px'}} onClick={() => onDelete(it)}>&times;</FlatButton>}>
             <span className={ it.isDone ? 'contents-is-done' : 'contents-default' }>{it.contents}</span>
           </ListItem>
