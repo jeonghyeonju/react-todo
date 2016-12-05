@@ -8,19 +8,9 @@ import './App.css';
 
 import ListTodo from './Components/ListTodo'
 import InputTodo from './Components/InputTodo'
+import FilterTodo from './Components/FilterTodo'
 
 injectTapEventPlugin();
-class FilterButton extends Component {
-  render(){
-    return(
-      <div>
-        <button onClick={()=>{this.props.onFilter('all')}}>ALL</button>
-        <button onClick={()=>{this.props.onFilter('todo')}}>TODO</button>
-        <button onClick={()=>{this.props.onFilter('done')}}>DONE</button>
-      </div>
-    )
-  }
-}
 
 class App extends Component {
   list = [];
@@ -43,7 +33,8 @@ class App extends Component {
               list={this.state.viewList}
               onDelete={this._onDelete.bind(this)}
               onToggle={this._onToggle.bind(this)}/>
-            <FilterButton onFilter={this._onFilter.bind(this)}/>
+            <FilterTodo
+              onFilter={this._onFilter.bind(this)}/>
           </div>
         </div>
       </MuiThemeProvider>
