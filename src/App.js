@@ -23,9 +23,10 @@ class FilterButton extends Component {
 }
 
 class App extends Component {
+  list = [];
   state = {
-    list: [],
-    viewList: []
+    viewList: [],
+    filter: 'all'
   }
 
   render() {
@@ -39,10 +40,10 @@ class App extends Component {
                 onSubmit={this._onSubmit.bind(this)} />
             </div>
             <ListTodo
-              list={this.state.list}
+              list={this.state.viewList}
               onDelete={this._onDelete.bind(this)}
               onToggle={this._onToggle.bind(this)}/>
-            <FilterButton />
+            <FilterButton onFilter={this._onFilter.bind(this)}/>
           </div>
         </div>
       </MuiThemeProvider>
@@ -50,34 +51,29 @@ class App extends Component {
   }
 
   _onSubmit(value) {
-    const newItem = [...this.state.list]
-    newItem.push({contents: value, isDone:false})
-    this.setState({list: newItem})
-    this.setState({viewList: newItem})
+    this.list.push({contents: value, isDone:false})
+    this._onFilter(this.state.filter);
   }
   _onDelete(value) {
-    const newItem = [...this.state.list]
-    newItem.splice(value, 1)
-    this.setState({list: newItem})
-    this.setState({viewList: newItem})
+    this.list.splice(this.list.indexOf(value), 1)
+    this._onFilter(this.state.filter);
   }
   _onToggle(value) {
-    const newItem = [...this.state.list]
-    newItem[value].isDone = !newItem[value].isDone;
-    this.setState({list: newItem})
-    this.setState({viewList: newItem})
+    this.list[value].isDone = !this.list[value].isDone;
+    this._onFilter(this.state.filter);
   }
   _onFilter(v){
-    const newItem = [...this.state.list]
+    const newItem = [...this.list]
     switch(v){
       case 'all':
-        this.setState({viewList: newItem})
+        this.setState({viewList: newItem, filter: 'all'})
         break;
       case 'todo':
-        this.setState({viewList: newItem.filter((v) => !v.isDone)});
+        this.setState({viewList: newItem.filter((v) => !v.isDone), filter: 'todo'});
+        this.setState({filter: 'todo'})
         break;
       case 'done':
-        this.setState({viewList: newItem.filter((v)=>v.isDone)})
+        this.setState({viewList: newItem.filter((v)=>v.isDone), filter: 'done'})
         break;
       default:
     }
