@@ -3,9 +3,28 @@
 import React, { Component } from 'react';
 import {List, ListItem} from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
-import FlatButton from 'material-ui/FlatButton';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import {grey400} from 'material-ui/styles/colors';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconMenu from 'material-ui/IconMenu';
+
+const iconButtonElement = (
+  <IconButton touch={true} >
+    <MoreVertIcon color={grey400} />
+  </IconButton>
+);
 
 export default class ListTodo extends Component {
+  rightIconMenu(it) {
+    const {onDelete} = this.props;
+    return (
+      <IconMenu iconButtonElement={iconButtonElement}>
+        <MenuItem>Edit</MenuItem>
+        <MenuItem onClick={() => onDelete(it)}>Delete</MenuItem>
+      </IconMenu>
+    )
+  }
   render() {
     const {onDelete, onToggle} = this.props;
     return (
@@ -14,7 +33,7 @@ export default class ListTodo extends Component {
           <ListItem
             key={i}
             leftCheckbox={<Checkbox checked={it.isDone} onCheck={() => onToggle(i)} />}
-            rightIconButton={<FlatButton style={{right: '0px'}} onClick={() => onDelete(it)}>&times;</FlatButton>}>
+            rightIconButton={ this.rightIconMenu(it) }>
             <span className={ it.isDone ? 'contents-is-done' : 'contents-default' }>{it.contents}</span>
           </ListItem>
         )))()}
