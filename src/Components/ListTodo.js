@@ -19,46 +19,44 @@ const iconButtonElement = (
 export default class ListTodo extends Component {
   state = {
     todovalue : '',
-    edit: false
+    edit: false,
+    editIndex: -1
   }
-  rightIconMenu(it) {
+  rightIconMenu(it, i) {
     const {onDelete} = this.props;
     return (
       <IconMenu iconButtonElement={iconButtonElement}>
-        <MenuItem onClick={this._onEdit.bind(this)}>Edit</MenuItem>
+        <MenuItem onClick={this._onEdit.bind(this, i)}>Edit</MenuItem>
         <MenuItem onClick={() => onDelete(it)}>Delete</MenuItem>
       </IconMenu>
     )
   }
   render() {
-    const {onDelete, onToggle} = this.props;
-    const {todovalue} = this.state
+    const {onToggle} = this.props;
     return (
       <List>
         {(() => this.props.list.map((it, i) => (
           <ListItem id={i}
             key={i}
             leftCheckbox={<Checkbox checked={it.isDone} onCheck={() => onToggle(i)} />}
-            rightIconButton={ this.rightIconMenu(it) }>
+            rightIconButton={ this.rightIconMenu(it, i) }>
             {
-              !this.state.edit ? (<span
+              !this.state.edit || this.state.editIndex !== i ? (<span
                 className={ it.isDone ? 'contents-is-done' : 'contents-default' }>{it.contents}</span>) : null
             }{
-              this.state.edit ? ( <TextField
+              this.state.edit && this.state.editIndex === i ? ( <TextField
               style={{width: '100%'}}
               hintText={it.contents}
-              floatingLabelText="edit your todo item."
+              floatingLabelText={it.contents}
               type="text" value={this.state.todovalue} onChange={this._onChange.bind(this)} />) : null
-
              }
           </ListItem>
         )))()}
       </List>
     )
   }
-  _onEdit(){
-    console.log('1')
-    this.setState({edit: true})
+  _onEdit(i){
+    this.setState({edit: true, editIndex:0})
   }
   _onChange(event){
     this.setState({todovalue: event.target.value})
