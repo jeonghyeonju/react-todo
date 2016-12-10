@@ -31,8 +31,10 @@ class App extends Component {
             </div>
             <ListTodo
               list={this.state.viewList}
+              onEdit={this._onEdit.bind(this)}
               onDelete={this._onDelete.bind(this)}
               onToggle={this._onToggle.bind(this)}/>
+
             <FilterTodo
               onFilter={this._onFilter.bind(this)}/>
           </div>
@@ -43,6 +45,10 @@ class App extends Component {
 
   _onSubmit(value) {
     this.list.push({contents: value, isDone:false})
+    this._onFilter(this.state.filter);
+  }
+  _onEdit(index, value){
+    this.list[index].contents = value;
     this._onFilter(this.state.filter);
   }
   _onDelete(value) {

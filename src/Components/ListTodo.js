@@ -26,13 +26,13 @@ export default class ListTodo extends Component {
     const {onDelete} = this.props;
     return (
       <IconMenu iconButtonElement={iconButtonElement}>
-        <MenuItem onClick={this._onEdit.bind(this, i)}>Edit</MenuItem>
+        <MenuItem onClick={this._onEditshow.bind(this, i)}>Edit</MenuItem>
         <MenuItem onClick={() => onDelete(it)}>Delete</MenuItem>
       </IconMenu>
     )
   }
   render() {
-    const {onToggle} = this.props;
+    const {onToggle, onEdit} = this.props;
     return (
       <List>
         {(() => this.props.list.map((it, i) => (
@@ -44,19 +44,30 @@ export default class ListTodo extends Component {
               !this.state.edit || this.state.editIndex !== i ? (<span
                 className={ it.isDone ? 'contents-is-done' : 'contents-default' }>{it.contents}</span>) : null
             }{
-              this.state.edit && this.state.editIndex === i ? ( <TextField
-              style={{width: '100%'}}
-              hintText={it.contents}
-              floatingLabelText={it.contents}
-              type="text" value={this.state.todovalue} onChange={this._onChange.bind(this)} />) : null
+              this.state.edit && this.state.editIndex === i ? (
+                <form onSubmit={(e) => {
+                    e.preventDefault()
+                    this.setState({edit: false, todovalue: ''})
+                    onEdit(i, this.state.todovalue)
+                  }}>
+                  <TextField onBlur={ () => {
+                      this.setState({edit: false, todovalue: ''})
+                      onEdit(i, this.state.todovalue)
+                    }}
+                    style={{width: '100%'}}
+                    hintText={it.contents}
+                    floatingLabelText={it.contents}
+                    type="text" value={this.state.todovalue} onChange={this._onChange.bind(this)} />
+                </form>
+              ): null
              }
           </ListItem>
         )))()}
       </List>
     )
   }
-  _onEdit(i){
-    this.setState({edit: true, editIndex:0})
+  _onEditshow(i){
+    this.setState({edit: true, editIndex:i})
   }
   _onChange(event){
     this.setState({todovalue: event.target.value})
