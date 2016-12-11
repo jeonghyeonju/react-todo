@@ -38,7 +38,7 @@ export default class ListTodo extends Component {
         {(() => this.props.list.map((it, i) => (
           <ListItem id={i}
             key={i}
-            leftCheckbox={<Checkbox checked={it.isDone} onCheck={() => onToggle(i)} />}
+            leftCheckbox={<Checkbox checked={it.isDone} onCheck={() => onToggle(it)} />}
             rightIconButton={ this.rightIconMenu(it, i) }>
             {
               !this.state.edit || this.state.editIndex !== i ? (<span
@@ -48,7 +48,7 @@ export default class ListTodo extends Component {
                 <form onSubmit={(e) => {
                     e.preventDefault()
                     this.setState({edit: false, todovalue: ''})
-                    onEdit(i, this.state.todovalue)
+                    onEdit(it, this.state.todovalue)
                   }}>
                   <TextField onBlur={ () => {
                       this.setState({edit: false, todovalue: ''})

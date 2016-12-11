@@ -47,8 +47,8 @@ class App extends Component {
     this.list.push({contents: value, isDone:false})
     this._onFilter(this.state.filter);
   }
-  _onEdit(index, value){
-    this.list[index].contents = value;
+  _onEdit(value, newValue){
+    this.list[this.list.indexOf(value)].contents = newValue;
     this._onFilter(this.state.filter);
   }
   _onDelete(value) {
@@ -56,7 +56,8 @@ class App extends Component {
     this._onFilter(this.state.filter);
   }
   _onToggle(value) {
-    this.list[value].isDone = !this.list[value].isDone;
+    const index = this.list.indexOf(value);
+    this.list[index].isDone = !this.list[index].isDone;
     this._onFilter(this.state.filter);
   }
   _onFilter(v){
