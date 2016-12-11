@@ -52,7 +52,7 @@ export default class ListTodo extends Component {
                   }}>
                   <TextField onBlur={ () => {
                       this.setState({edit: false, todovalue: ''})
-                      onEdit(i, this.state.todovalue)
+                      onEdit(it, this.state.todovalue)
                     }}
                     style={{width: '100%'}}
                     hintText={it.contents}
