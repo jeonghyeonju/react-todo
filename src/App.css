@@ -1,6 +1,8 @@
 .App {
   padding: 10px;
   font-family: 'Roboto', sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .App-logo {
@@ -31,8 +33,16 @@ ul li {
 .contents-is-done {
   color: gray;
   text-decoration: line-through;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  white-space: pre;
 }
 .contents-default {
   color: black;
   text-decoration: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  white-space: pre;
 }
