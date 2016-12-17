@@ -1,16 +1,20 @@
 //@flow
 
 import React, { Component } from 'react';
+import { createStore } from 'redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import './App.css';
 
+import todoApp from './reducers/todoApp';
 import ListTodo from './Components/ListTodo'
 import InputTodo from './Components/InputTodo'
 import FilterTodo from './Components/FilterTodo'
 
 injectTapEventPlugin();
+
+let store = createStore(todoApp);
 
 class App extends Component {
   list = [];
