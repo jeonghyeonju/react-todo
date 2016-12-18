@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { createStore } from 'redux';
+import { connect } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -14,7 +15,14 @@ import FilterTodo from './Components/FilterTodo'
 
 injectTapEventPlugin();
 
-let store = createStore(todoApp);
+
+const mapStoreToProp = (store)=>{
+  return {a:1}
+}
+
+const mapDispatchToPops = (dispatch)=>{
+  return {dispatch};
+}
 
 class App extends Component {
   list = [];
@@ -22,8 +30,9 @@ class App extends Component {
     viewList: [],
     filter: 'all'
   }
-
   render() {
+    console.log(this.props)
+    const { dispatch } = this.props;
     return (
       <MuiThemeProvider>
         <div>
@@ -82,4 +91,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapStoreToProp, mapDispatchToPops)(App);
