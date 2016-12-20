@@ -1,12 +1,12 @@
 //@flow
 
-const ADD_TODO = 'ADD_TODO'
-const EDIT_TODO = 'EDIT_TODO'
-const DELETE_TODO = 'DELETE_TODO'
+export const ADD_TODO = 'ADD_TODO'
+export const EDIT_TODO = 'EDIT_TODO'
+export const DELETE_TODO = 'DELETE_TODO'
+export const TODO_TODO = 'DELETE_TODO'
+export const COMPLETE_TODO = 'DELETE_TODO'
+export const FILTER_TODO = 'DELETE_TODO'
 
-const TODO_TODO = 'DELETE_TODO'
-const COMPLETE_TODO = 'DELETE_TODO'
-const FILTER_TODO = 'DELETE_TODO'
 export function add(text){
   return {
     type: ADD_TODO,
@@ -14,7 +14,7 @@ export function add(text){
   }
 }
 
-export function delete(obj){
+export function deleteTodo(obj){
   return {
     type: DELETE_TODO,
     obj
