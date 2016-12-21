@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { add } from './actions/input';
 import './App.css';
 
 import todoApp from './reducers/todoApp';
@@ -17,7 +18,7 @@ injectTapEventPlugin();
 
 
 const mapStoreToProp = (store)=>{
-  return {a:1}
+  return store;
 }
 
 const mapDispatchToPops = (dispatch)=>{
@@ -30,6 +31,9 @@ class App extends Component {
     viewList: [],
     filter: 'all'
   }
+  componentWillReceiveProps(props){
+    this._onSubmit(props.todos.text);
+  }
   render() {
     console.log(this.props)
     const { dispatch } = this.props;
@@ -40,7 +44,7 @@ class App extends Component {
           <div className="App">
             <div className="App-intro">
               <InputTodo
-                onSubmit={this._onSubmit.bind(this)} />
+                onSubmit={(value) => {dispatch(add(value))}} />
             </div>
             <ListTodo
               list={this.state.viewList}

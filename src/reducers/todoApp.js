@@ -7,7 +7,7 @@ function todos (state=[], action){
   console.log(action)
   switch(action.type){
     case ADD_TODO:
-      return [...state,{text:action.text, isDone: false}]
+      return  { text : action.text };
     case EDIT_TODO:
       return [...state,{text:action.text}]
     case COMPLETE_TODO:
