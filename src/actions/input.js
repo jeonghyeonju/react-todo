@@ -6,6 +6,13 @@ export const DELETE_TODO = 'DELETE_TODO'
 export const TODO_TODO = 'DELETE_TODO'
 export const COMPLETE_TODO = 'DELETE_TODO'
 export const FILTER_TODO = 'DELETE_TODO'
+export const LIST_TODO = 'LIST_TODO'
+
+export function list(){
+  return {
+    type: LIST_TODO
+  }
+}
 
 export function add(text){
   return {

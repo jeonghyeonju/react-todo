@@ -1,11 +1,20 @@
 //@flow
 
 import { combineReducers } from 'redux';
-import { ADD_TODO, EDIT_TODO, COMPLETE_TODO }  from '../actions/input';
+import { ADD_TODO ,LIST_TODO, EDIT_TODO, COMPLETE_TODO }  from '../actions/input';
 
-function todos (state=[], action){
+const initial_state = {
+  list: [
+    {contents: 'aaa', isDone:false},
+    {contents: 'bbb', isDone:false},
+  ],
+};
+
+function todos (state=initial_state, action){
   console.log(action)
   switch(action.type){
+    case LIST_TODO:
+      return [...state.list]
     case ADD_TODO:
       return  { text : action.text };
     case EDIT_TODO:

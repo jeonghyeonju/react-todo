@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { add } from './actions/input';
+import { add, list } from './actions/input';
 import './App.css';
 
 import todoApp from './reducers/todoApp';
@@ -18,7 +18,9 @@ injectTapEventPlugin();
 
 
 const mapStoreToProp = (store)=>{
-  return store;
+  return {
+    list: store.todos.list
+  }
 }
 
 const mapDispatchToPops = (dispatch)=>{
@@ -26,16 +28,18 @@ const mapDispatchToPops = (dispatch)=>{
 }
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    const { dispatch } = props;
+    dispatch(list())
+  };
   list = [];
   state = {
     viewList: [],
     filter: 'all'
   }
-  componentWillReceiveProps(props){
-    this._onSubmit(props.todos.text);
-  }
   render() {
-    console.log(this.props)
+    console.log(this.props.list)
     const { dispatch } = this.props;
     return (
       <MuiThemeProvider>
@@ -47,7 +51,7 @@ class App extends Component {
                 onSubmit={(value) => {dispatch(add(value))}} />
             </div>
             <ListTodo
-              list={this.state.viewList}
+              list={this.props.list}
               onEdit={this._onEdit.bind(this)}
               onDelete={this._onDelete.bind(this)}
               onToggle={this._onToggle.bind(this)}/>
